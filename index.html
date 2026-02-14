@@ -126,44 +126,67 @@ body {
 
 /* ---------------- MEMORY TAB ---------------- */
 .memory-container {
-  display:flex;
-  flex-direction:column;
-  padding:40px;
-  background:linear-gradient(to bottom,#f6efe5,#eadcc8);
-  overflow-y:auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  background: linear-gradient(to bottom,#f6efe5,#eadcc8);
+  overflow-y: auto;
 }
-.memories-title {
-  text-align:center;
-  font-family:'Great Vibes', cursive;
-  font-size:64px;
-  color:#c27d7d;
-  margin-bottom:50px;
-}
-.memories-gallery {
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:60px;
-}
-.memory {
-  background:#fffdf9;
-  padding:18px;
-  width:270px;
-  border-radius:16px;
-  box-shadow:0 25px 50px rgba(0,0,0,0.15);
-  opacity:0;
-  transform:translateY(40px) rotate(-3deg) scale(0.95);
-  transition:all 0.6s ease;
-}
-.memory:nth-child(odd) { transform: translateY(40px) rotate(-2deg) scale(0.95); }
-.memory:nth-child(even) { transform: translateY(40px) rotate(2deg) scale(0.95); }
-.memory img,
-.memory video { width:100%; border-radius:12px; }
-.memory:hover img,
-.memory:hover video { transform:scale(1.08); }
-.memory:hover { transform:scale(1.08) rotate(0deg); box-shadow:0 35px 80px rgba(194,125,125,0.35); z-index:10; }
-.memory span { display:block; margin-top:14px; text-align:center; font-size:17px; color:#6a4e42; }
 
+.memories-title {
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 64px;
+  color: #c27d7d;
+  margin-bottom: 50px;
+}
+
+.memories-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px; /* spacing between items */
+  max-width: 1200px; /* optional, keeps grid centered on wide screens */
+}
+
+.memory {
+  background: #fffdf9;
+  padding: 18px;
+  width: 260px; /* fixed width for consistency */
+  border-radius: 16px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+  opacity: 0;
+  transform: translateY(40px) rotate(-3deg) scale(0.95);
+  transition: all 0.6s ease;
+}
+
+.memory img,
+.memory video {
+  width: 100%;
+  max-height: 300px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.memory:hover img,
+.memory:hover video {
+  transform: scale(1.08);
+}
+
+.memory:hover {
+  transform: scale(1.08) rotate(0deg);
+  box-shadow: 0 35px 80px rgba(194,125,125,0.35);
+  z-index: 10;
+}
+
+.memory span {
+  display: block;
+  margin-top: 14px;
+  text-align: center;
+  font-size: 17px;
+  color: #6a4e42;
+}
 /* ---------------- FLOWER TAB ---------------- */
 .flower-tab {
   position: relative;
@@ -273,16 +296,16 @@ function openLetter(){
 }
 
 /* ---------------- MEMORIES ---------------- */
-const memories=document.querySelectorAll('.memory');
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
+const memories = document.querySelectorAll('.memory');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
     if(entry.isIntersecting){
-      entry.target.style.opacity=1;
-      entry.target.style.transform='translateY(0) rotate(0deg) scale(1)';
+      entry.target.style.opacity = 1;
+      entry.target.style.transform = 'translateY(0) rotate(0deg) scale(1)';
     }
   });
 },{threshold:0.2});
-memories.forEach(m=>observer.observe(m));
+memories.forEach(m => observer.observe(m));
 
 /* ---------------- FLOWERS ---------------- */
 const flowerTypes = ['🌸','🌺','🌷','💖','🌹','💐'];
