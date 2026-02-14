@@ -118,52 +118,53 @@ body {
 
 /* ---------------- MEMORY TAB ---------------- */
 .memory-container {
-  flex-direction:column;
-  padding:40px;
-  background:linear-gradient(to bottom,#f6efe5,#eadcc8);
-  overflow-y:auto;
+  padding: 40px;
+  background: linear-gradient(to bottom, #f6efe5, #eadcc8);
+  overflow-y: auto;
 }
+
 .memories-title {
-  text-align:center;
-  font-family:'Great Vibes', cursive;
-  font-size:64px;
-  color:#c27d7d;
-  margin-bottom:50px;
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 64px;
+  color: #c27d7d;
+  margin-bottom: 50px;
 }
+
 .memories-gallery {
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:60px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
 }
+
 .memory {
-  background:#fffdf9;
-  padding:18px;
-  width:270px;
-  border-radius:16px;
-  box-shadow:0 25px 50px rgba(0,0,0,0.15);
-  opacity:0;
-  transform:translateY(40px) rotate(-3deg) scale(0.95);
-  transition:all 0.6s ease;
+  background: #fffdf9;
+  padding: 18px;
+  width: 270px;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+  opacity: 0;
+  transform: translateY(40px) rotate(-3deg) scale(0.95);
+  transition: all 0.6s ease;
 }
-.memory img,
-.memory video {
-  width:100%;
-  border-radius:12px;
-}
-.memory:hover img,
-.memory:hover video { transform:scale(1.08); }
+
+/* Slight rotation variance for casual look */
+.memory:nth-child(odd) { transform: translateY(40px) rotate(-2deg) scale(0.95); }
+.memory:nth-child(even) { transform: translateY(40px) rotate(2deg) scale(0.95); }
+
 .memory:hover {
-  transform:scale(1.08) rotate(0deg);
-  box-shadow:0 35px 80px rgba(194,125,125,0.35);
-  z-index:10;
+  transform: scale(1.08) rotate(0deg);
+  box-shadow: 0 35px 80px rgba(194,125,125,0.35);
+  z-index: 10;
 }
 .memory span {
-  display:block;
-  margin-top:14px;
-  text-align:center;
-  font-size:17px;
-  color:#6a4e42;
+  display: block;
+  margin-top: 14px;
+  text-align: center;
+  font-size: 17px;
+  color: #6a4e42;
 }
 
 /* ---------------- FLOWER TAB ---------------- */
@@ -230,11 +231,27 @@ body {
 
 <!-- ---------------- MEMORY TAB ---------------- -->
 <div id="memoryTab" class="memory-container">
-  <h1 class="memories-title">Our Memories So Far 📸</h1>
-  <div class="memory"><img src="8A06392B-8944-437E-93E5-72B2765220ED_1_105_c.jpeg"><span>One of my favorite days 🤍</span></div>
-<div class="memory"><img src="CE1FECA6-8C21-46B7-AF61-E65ED8A6C7AE_1_105_c.jpeg"><span>I had to include your favourite photo of us 💕</span></div>
-<div class="memory"><video controls><source src="e39bb28e81ef4ebea965381f41d1579e.mp4" type="video/mp4"></video><span>What started as a coffee date and ended with us as lovers 🎥</span></div>
-<div class="memory"><img src="IMG_7366.jpeg"><span>Something with a personal touch</span></div>
+  <h1 class="memories-title">Our Memories So Far</h1>
+  <div class="memories-gallery">
+    <div class="memory">
+      <img src="8A06392B-8944-437E-93E5-72B2765220ED_1_105_c.jpeg" alt="Memory 1">
+      <span>One of my favorite days 🤍</span>
+    </div>
+    <div class="memory">
+      <img src="CE1FECA6-8C21-46B7-AF61-E65ED8A6C7AE_1_105_c.jpeg" alt="Memory 2">
+      <span>I had to include your favourite photo of us 💕</span>
+    </div>
+    <div class="memory">
+      <video controls>
+        <source src="e39bb28e81ef4ebea965381f41d1579e.mp4" type="video/mp4">
+      </video>
+      <span>What started as a coffee date and ended with us as lovers 🎥</span>
+    </div>
+    <div class="memory">
+      <img src="IMG_7366.jpeg" alt="Memory 3">
+      <span>Something with a personal touch</span>
+    </div>
+  </div>
 </div>
 
 <!-- ---------------- FLOWER TAB ---------------- -->
@@ -266,16 +283,18 @@ function openLetter(){
 }
 
 /* ---------------- MEMORIES FADE-IN ---------------- */
-const memories=document.querySelectorAll('.memory');
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.style.opacity=1;
-      entry.target.style.transform='translateY(0) rotate(0deg) scale(1)';
+const memories = document.querySelectorAll('.memory');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = 1;
+      entry.target.style.transform = 'translateY(0) rotate(0deg) scale(1)';
     }
   });
-},{threshold:0.2});
-memories.forEach(m=>observer.observe(m));
+}, { threshold: 0.2 });
+
+memories.forEach(m => observer.observe(m));
 
 /* ---------------- FLOWERS ---------------- */
 // ---------------- FLOWERS ----------------
